@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    // const sum =(a,b)=>{
+    //   return a+b;
+    // }
+
+    // console.log(sum(4,4));
+
+    // const sayHello =(a)=>{
+    //   console.log("hello,",a);
+    //   return "have a good day";
+    // }
+     
+    // const seeValue= sayHello("manoj");
+    // console.log(seeValue);
+  
+    const searchKey = (arr, key)=>{
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i]==key) {
+            return true;
+          }
+      }
+      return false;
+    }
+
+    const array =[];
+    
+    const addElmnt = prompt("enter the values to the array");
+    array.push(addElmnt);
+    console.log(array);
+
+    // console.log(searchKey(array,3));
+
+  </script>
+</body>
+</html>

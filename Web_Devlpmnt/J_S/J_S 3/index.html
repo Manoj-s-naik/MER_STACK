@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>BLOCK SCOP AND CODE DEBUGGING</H1>
+</body>
+<script>
+    // let a = 10;
+    // console.log(a);
+    // function outer(){
+    //     let a = 30;
+    //     console.log(a);
+    
+    //     function inner(){
+    //         console.log(a);
+    //     }
+    //     console.log(a);
+    //     inner();
+    // }
+    // outer();
+
+    let bigger =function (fun){
+        console.log("hey smaller");
+        smaller();
+    }
+    let sameFN = bigger;
+    function smaller(){
+        let a =2;
+        console.log(a);
+    }
+    // bigger(smaller);
+
+    sameFN();
+
+</script>
+</html>

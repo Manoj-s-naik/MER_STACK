@@ -1,0 +1,9 @@
+.parent {
+    height: 500px;
+    width: 400px;
+    border: 1px solid black;
+    margin: auto;
+}
+input {
+    margin-left: 40px;
+}

@@ -1,0 +1,81 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevents scrolling */
+  }
+
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(250, 187, 39);
+}
+
+.box {
+    height: 600px;
+    width :1000px;
+    background-color: rgb(245, 229, 229);
+    margin: 10px;
+    border-radius: 10px;
+} 
+
+
+
+ul {
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 500px;
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 30px;
+  }
+
+  .inbox{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(233, 170, 10);
+    display: inline-block;
+ 
+    
+  }
+   img{
+    height: 200px;
+    border: hidden;
+    margin-right: 100px;
+   }
+   
+  
+  .p1 {
+    display: inline-block;
+    margin-left: 80px; /* Adds right margin to elements with class p1 */
+  }
+
+
+
+.about {
+   color: rgb(245, 143, 19);
+   margin-left: 80px;
+}
+
+h1,.p {
+    margin-left: 80px;
+    font-weight: thick;
+    
+}
+button{
+    margin-left: 30px;
+}
+
+.button {
+    background-color: rgb(250, 187, 39);
+    border-radius: 3px;
+    padding: 5px;
+    margin-left: 80px;
+    padding: 5px;
+    border: hidden;
+} 
