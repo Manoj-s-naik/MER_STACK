@@ -7,9 +7,57 @@
 </head>
 <body>
     <h1>DOCUMENT AND EVENTS IN JS</h1>
+    <p class="PTag1">i am first p </p>
+    <button>click me</button>
+    <p class="PTag2">i am 2nd p</p>
+    <p class="PTag3">i am 3rd p</p>
+    <div class="ul">
+        <ul>
+
+        </ul>
+    </div>
 </body>
 <SCript>
-   
+    // const html = document.children[0];
+    // console.log(html);
+    // const head = html.children[0];
+    // console.log(head);
+    // const body = html.children[1];
+    // console.log(body);
+    // console.log(body.innerHTML);
+    // const body = html.children[1];
+    // console.log(body);
+
+    const PTag =document.querySelector(".PTag1");
+    
+    console.log(PTag);
+    PTag.style.backgroundColor="red";
+    PTag.innerHTML="hai i am updated by js";
+    const PTag2 =document.querySelector(".PTag2");
+    PTag2.remove();
+    // const firstPtag =PTag[0];
+    // console.log(firstPtag);
+    const secondPtag =PTag[1];
+    console.log(secondPtag);
+    // secondPtag.remove();
+    // console.log(secondPtag);
+    // const thirdPtag =PTag[2];
+    // console.log(thirdPtag);
+    // console.log(thirdPtag.textContent);
+    // console.log(thirdPtag.innerHTML);
+    // console.log(thirdPtag.innerText);
+    
+    const ulElmnt = document.querySelector(".ul");
+    const liElmnt = document.createElement("li");
+    const button = document.createElement("button");
+
+    liElmnt.innerText="i am li";
+    // console.log(liElmnt);
+    ulElmnt.appendChild(liElmnt);
+    ulElmnt.appendChild(button);
+    button.innerText="click me";
+
+
    
 
 </SCript>
