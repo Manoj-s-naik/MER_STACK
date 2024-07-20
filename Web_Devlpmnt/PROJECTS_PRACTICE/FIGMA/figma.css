@@ -56,6 +56,11 @@ p,h1{
 button{
   margin-left: 20px;
 }
+.Logout{
+  background-color: rgb(244, 58, 16);
+  padding: 10px;
+  border-radius: 10px;
+}
   
 
 
