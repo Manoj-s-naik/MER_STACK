@@ -26,15 +26,14 @@
     const btn = document.querySelector("button");
     const box = document.querySelector(".box");
     let colors = ["red","blue","yellow"];
-    console.log(colors.length);
+    let i = 0;
+    
 
     const changeBg = ()=>{
-        for(let i=0; i<colors.length; i++){
-
-            box.style.backgroundColor=colors[i];
+        box.style.backgroundColor=colors[i];
             i++;
         }
-    }
+    
     btn.addEventListener("click",changeBg);
 // </script>
 </html>

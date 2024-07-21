@@ -1,0 +1,40 @@
+.box{
+    height: 1000px;
+    width :700px;
+    border: 2px solid black;
+    margin: auto;
+    background-color: rgb(237, 149, 34);
+}
+
+h1{
+    text-align: center;
+    color: rgb(4, 75, 99);
+}
+.input-area{
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+
+.list-area{
+    height: 600px;
+    width: 500px;
+    border: 2px solid rgb(223, 246, 246);
+    margin: auto;
+    margin-top: 100px;
+    background-color: beige;
+}
+
+button{
+    background-color: rgb(21, 224, 72);
+    border: 2px;
+    margin-left: 10px;
+    border-radius: 5px;
+    
+}
+li{
+    margin-top: 20px;
+}
+ul{
+    list-style-type: none;
+}
