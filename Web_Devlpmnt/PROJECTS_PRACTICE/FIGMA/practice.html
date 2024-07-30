@@ -1,53 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body style="background-color: blue">
-    <h1>hai sanketh</h1>
-    <h1>WEL COME</h1>
-  </body>
-  <script>
-    // const getAverage=(scores)=>{
-    //   let sum =0;
-    //   for( let i=0; i<scores.length; i++){
-    //     sum = sum+scores[i];
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .weather {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .weather h2 {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Tourist Paradise</h1>
+    </header>
+    <div id="map"></div>
+    <div class="content">
+        <div class="weather" id="weather">
+            <h2>Weather in Your Destination</h2>
+            <p id="weather-info">Loading...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Replace with your OpenWeatherMap API key
+        const weatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+        // Replace with your Google Maps API key
+        const mapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+        
+        // Example coordinates (Latitude, Longitude)
+        const destination = { lat: 48.8566, lng: 2.3522 }; // Paris, France
+        
+        // Load Google Map
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: destination
+            });
+            const marker = new google.maps.Marker({
+                position: destination,
+                map: map
+            });
+        }
 
-    //   }
-    //   numScore = scores.length;
-    //   let average = sum/numScore;
+        // Fetch weather information
+        async function fetchWeather() {
+            try {
+                const response = await fetch(https:api.openweathermap.org/data/2.5/weather?lat=${destination.lat}&lon=${destination.lng}&appid=${weatherApiKey}&units=metric);
+                const data = await response.json();
+                document.getElementById('weather-info').textContent = Temperature: ${data.main.temp}°C, ${data.weather[0].description};
+            } catch (error) {
+                document.getElementById('weather-info').textContent = 'Failed to load weather information.';
+            }
+        }
 
-    //   return average;
-    // }
-    // console.log(getAverage([92, 88, 12, 77, 57, 100, 67, 38, 97, 89]));
-    // let array =[];
-    // while (array.length<5) {
-    //   let arrElmnt =prompt("enter the value to add the array");
-    //   array.push(arrElmnt);
-    // }
-
-    // console.log(array);
-
-    function getGrade(score) {
-      if (score === 100) {
-        console.log("A++");
-      } else if (score <= 99 && score >= 90) {
-        console.log("A");
-      } else if (score <= 89 && score >= 80) {
-        console.log("B");
-      } else if (score <= 79 && score >= 70) {
-        console.log("C");
-      } else if (score <= 69 && score >= 60) {
-        console.log("D");
-      } else {
-        console.log("F");
-      }
-    }
-
-    console.log(getGrade(96));
-    console.log(getGrade(82));
-    console.log(getGrade(56));
-  </script>
+        // Initialize
+        window.onload = function() {
+            fetchWeather();
+        };
+    </script>
+    <script async defer src={https:maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap}></script>
+</body>
 </html>

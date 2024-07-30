@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+      body {
+        margin: 0;
+      }
+      .full-screen {
+        height: 100vh;
+        width: 100vmax;
+        background-color: gray;
+       
+        
+      }
+      .child1 {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        border: 1px solid black;
+      }
+      .child2 {
+        border: 1px solid black;
+        height: 100px;
+        width: 100px;
+
+        background-color: red;
+      }
+      .container{
+        height: 400px;
+        width: 500px;
+        background-color: aquamarine;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* align-items:last baseline; */
+      }
+      .child3 {
+        background-color: red;
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>FLEX BOX</h1> -->
+    <div class="full-screen">
+      <div class="container">
+        <div class="child1"></div>
+        <div class="child2"></div>
+        <div class="child3"></div>
+      </div>
+    </div>
+  </body>
+</html>
