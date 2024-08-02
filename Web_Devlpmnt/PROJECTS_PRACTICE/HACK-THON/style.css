@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.logo {
+  height: 100px;
+  margin-top: auto;
+  background-color: rgb(176, 176, 176);
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  font-family: sans-serif;
+  height: 50%;
+}
+
+ul {
+  list-style: none;
+  height: 642px;
+  width: 150px;
+  background-color: rgb(245, 245, 244);
+}
+
+li {
+  font-family: sans-serif;
+  font-size: px;
+  padding: 30px;
+}
