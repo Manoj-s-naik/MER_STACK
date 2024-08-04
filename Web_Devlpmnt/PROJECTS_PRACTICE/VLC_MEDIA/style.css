@@ -1,12 +1,38 @@
 header{
-    background-color: rebeccapurple;
     
+    background-color: rebeccapurple;
 }
 .title-bar{
-    height: 6rem;
     display: flex;
+    align-items: center;
+    outline: 1px solid black;
+    height: 4rem;
+
 }
 
 .title-img {
     height: 60%;
 }
+
+.title {
+    font-size: 20px;
+}
+
+.menubar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 10px;
+}
+.main {
+    height: calc(100vh - 9rem);
+    
+    background-color: black;
+    
+ } 
+
+ footer{ 
+    background-color: aqua; 
+     height: 4rem; 
+}  
+ 
