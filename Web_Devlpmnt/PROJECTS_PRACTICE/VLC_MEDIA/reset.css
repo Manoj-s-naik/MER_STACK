@@ -5,5 +5,14 @@
 body{
     margin: 0;
     padding: 0;
-   overflow: hidden;
+    overflow: hidden;
+}
+
+ul{
+    padding: 0;
+}
+li{
+    list-style: none;
+    padding: 0;
+    
 }
