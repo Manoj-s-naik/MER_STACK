@@ -72,6 +72,13 @@ header{
     justify-content: center;
  } 
 
+.vedio {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
  footer{ 
     background-color: rgb(194, 197, 197); 
      height: 5rem; 
