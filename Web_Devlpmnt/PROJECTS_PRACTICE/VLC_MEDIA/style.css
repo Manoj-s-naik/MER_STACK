@@ -29,6 +29,12 @@ header{
     /* background-color: red; */
 }
 
+.menu {
+    position: relative;
+}
+.menu:hover .menu-items {
+    display: block;
+}
 .menubar {
     display: flex;
     align-items: center;
@@ -39,25 +45,27 @@ header{
     
     
 }
-.menu {
-    position: relative;
+#vedioInput{
+    display: none;
 }
 
+.menu-btn:hover {
+    display: block;
+}
 
 .menu-items{
     position: absolute;
     background-color: rgb(236, 229, 243);
-    top: 13px;
-    width: 6.6rem;
+    top: 1px;
+    display: none;
+    padding: 0.5rem;
 
     
 }
-li {
-   
-}
+
 
 .main {
-    height: calc(100vh - 9rem);
+    height: calc(100vh - 10rem);
     background-color: black;
     display: flex;
     align-items: center;
