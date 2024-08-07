@@ -27,44 +27,83 @@ const acceptinputHandler = (obj) => {
 vedioBtn.addEventListener("click", handleInput);
 vedioInput.addEventListener("change", acceptinputHandler);
 
+
+
 const speedupHandler = () => {
-  const isvedioAvl = document.querySelector(".vedio");
-  if (isvedioAvl == null) {
+  const vedioPredsent = document.querySelector(".vedio");
+  if (vedioPredsent == null) {
     return;
 };
-isvedioAvl.playbackRate =2.0;
+  
+ if(vedioPredsent.playbackRate > 3){
+  return;
+ }
+ const speed = vedioPredsent.playbackRate + 0.5;
+ vedioPredsent.playbackRate =speed;
+ //console.log(speed); //uncomment this line for see the speed of the vedio.
+//  console.log(vedioPredsent.playbackRate); uncomment this line for see the current or default speed of the vedio.
+ 
 }
 
 
-
-
-
 const speedDownHandler = () => {
-    const isvedioAvl = document.querySelector(".vedio");
-    if (isvedioAvl == null) {
+    const vedioPredsent = document.querySelector(".vedio");
+    if (vedioPredsent == null) {
       return;
   };
-  isvedioAvl.playbackRate =0.5;
+    if(vedioPredsent <= 0.5){
+      return;
+    }
+  const down = vedioPredsent.playbackRate - 0.3;
+  vedioPredsent.playbackRate = down;
+   console.log(down); //=>bug 
+  
 };
 
 
 
 
 const volumeupHandler = () => {
-  alert("i am clicked");
-};
-const volumedownHandler = () => {
-  alert("i am clicked");
+    const vedioPredsent = document.querySelector(".vedio");
+    if (vedioPredsent == null) {
+      return;
+  };
+    if(vedioPredsent.volume =1){
+      return;
+    }
+  const up = vedioPredsent.volume + 0.3 ;
+  vedioPredsent.volume = up;
+  console.log(up);
+  
 };
 
+
+
+const volumedownHandler = () => {
+    const vedioPredsent = document.querySelector(".vedio");
+    if (vedioPredsent == null) {
+      return;
+  };
+  if(vedioPredsent.volume = 0){
+    return;
+  }
+const down = vedioPredsent.volume - 0.3 ;
+vedioPredsent.volume = down;
+console.log(down);
+
+};
+
+
+
+
 const repeatVedio = () => {
-  const isvedioAvl = document.querySelector(".vedio");
-  if (isvedioAvl == null) {
+  const vedioPredsent = document.querySelector(".vedio");
+  if (vedioPredsent == null) {
     return;
   }
   alert("vedio loop is started");
 
-  isvedioAvl.loop = true;
+  vedioPredsent.loop = true;
 };
 
 speedUp.addEventListener("click", speedupHandler);
