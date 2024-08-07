@@ -20,7 +20,7 @@ IMPORTANT NOTES FOR VLC
     2. Controls
         a. browser give obj => collection of properties
         b. in obj there are so many properties ,here we use the "target" and "file" property.
-        c. obj.target.files
+        c. obj.target.files[0] => its in the formate of arry.
         d. If we play a vedio in a browser from input type file , we can convert file to url.
         e. To convert the file to url 
             1. Browser give url.createobjecturl("pass the image") 
