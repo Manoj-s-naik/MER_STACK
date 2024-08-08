@@ -91,6 +91,24 @@ header{
 
  footer{ 
     background-color: rgb(194, 197, 197); 
-     height: 5rem; 
+    height: 5rem; 
+    
 }  
+
+.menu-btns {
+    display: flex;
+}
+
+.rest-options {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-left: 50%;
+}
+
+.slider {
+    width: 100%;
+}
+
+
  

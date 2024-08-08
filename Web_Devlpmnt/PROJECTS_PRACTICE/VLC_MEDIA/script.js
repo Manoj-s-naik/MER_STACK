@@ -109,8 +109,6 @@ const repeatVedio = () => {
   if (vedioPredsent == null) {
     return;
   }
-  alert("vedio loop is started");
-
   vedioPredsent.loop = true;
 };
 
@@ -134,3 +132,5 @@ const showToast = (message)=>{
     
   }, 1000);
 }
+
+

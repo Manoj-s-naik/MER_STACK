@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VLC media player</title>
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
       rel="shortcut icon"
       href="./Assets/VLC_media_player-Logo.wine.png"
       type="image/x-icon"
@@ -25,7 +29,7 @@
       <div class="menubar">
         <div class="menu">
           <div class="menu-btn" id="vedioBtn">Open</div>
-          <input type="file" name=""  id="vedioInput">
+          <input type="file" name="" id="vedioInput" />
         </div>
         <div class="menu">
           <div class="menu-btn">Playback</div>
@@ -46,10 +50,37 @@
         </div>
       </div>
     </header>
-    <main class="main">
-    </main>
+    <main class="main"></main>
     <div class="toast"></div>
-    <footer></footer>
+    <footer>
+      <div class="time-container">
+        <div class="current-time" id="currentTime">--/--/--</div>
+        <div class="time-slider">
+          <input type="range" value="0" min="0" class="slider" id="slider" />
+        </div>
+        <div class="total-time" id="totalTime">--/--/--</div>
+      </div>
+      <div class="menu-btns">
+        <div class="play_pause-container btn" id="playPause"></div>
+        <div class="rest-options">
+          <div class="back-btn btn" id="backBtn">
+            <i class="fa-solid fa-forward"></i>
+          </div>
+          <div class="placeholder btn" id="stopBtn">
+            <i class="fas fa-stop"></i>
+          </div>
+          <div class="fullscreen-btn btn" id="fullScreen">
+            <i class="fa-solid fa-backward"></i>
+          </div>
+          <div class="forward-btn btn" id="forwardBtn">
+            <i class="fa-solid fa-repeat"></i>
+          </div>
+          <div class="fullscreen-btn btn" id="fullScreen">
+            <i class="fa-solid fa-expand"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
   <script src="script.js"></script>
 </html>
