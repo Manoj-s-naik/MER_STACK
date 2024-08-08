@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> TOAST Document</title>
+    <style>
+        .parent {
+            height: 600px;
+            width: 600px;
+            background-color: blueviolet;
+            margin:auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .toast {
+            position: absolute;
+            top:2rem;
+            left:33rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <button class="button">check volume</button>
+        <div class="toast">100%</div>
+    </div>
+</body>
+<script>
+    const button = document.querySelector(".button");
+    const toast = document.querySelector(".toast");
+
+    const showToast =()=>{
+        toast.style.display="block";
+        setTimeout(function(){
+            toast.style.display="none";
+
+        },2000)
+    }
+
+    button.addEventListener("click",showToast);
+
+
+
+</script>
+</html>

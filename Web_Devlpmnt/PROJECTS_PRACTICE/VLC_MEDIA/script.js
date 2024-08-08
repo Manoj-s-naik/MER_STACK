@@ -20,7 +20,7 @@ const acceptinputHandler = (obj) => {
   vedioElemnt.src = link;
   vedioElemnt.setAttribute("class", "vedio");
   vedioElemnt.play();
-  vedioElemnt.controls = true;
+  vedioElemnt.controls = true;// for check bugs easy controlls
   vedioPlayer.appendChild(vedioElemnt);
 };
 
@@ -38,9 +38,9 @@ const speedupHandler = () => {
  if(vedioPredsent.playbackRate > 3){
   return;
  }
- const speed = vedioPredsent.playbackRate + 0.5;
- vedioPredsent.playbackRate =speed;
- //console.log(speed); //uncomment this line for see the speed of the vedio.
+ const increasedSpeed = vedioPredsent.playbackRate + 0.5;
+ vedioPredsent.playbackRate = increasedSpeed;
+//  console.log(increasedSpeed); //uncomment this line for see the speed of the vedio.
 //  console.log(vedioPredsent.playbackRate); uncomment this line for see the current or default speed of the vedio.
  
 }
@@ -51,12 +51,12 @@ const speedDownHandler = () => {
     if (vedioPredsent == null) {
       return;
   };
-    if(vedioPredsent <= 0.5){
+    if(vedioPredsent <= 0){
       return;
     }
-  const down = vedioPredsent.playbackRate - 0.3;
-  vedioPredsent.playbackRate = down;
-   console.log(down); //=>bug 
+  const decreasedSpeed = vedioPredsent.playbackRate - 0.5;
+  vedioPredsent.playbackRate = decreasedSpeed;
+   //console.log(decreasedSpeed); //=>bug 
   
 };
 
@@ -68,12 +68,12 @@ const volumeupHandler = () => {
     if (vedioPredsent == null) {
       return;
   };
-    if(vedioPredsent.volume =1){
+    if(vedioPredsent.volume >= 0.99){
       return;
     }
-  const up = vedioPredsent.volume + 0.3 ;
-  vedioPredsent.volume = up;
-  console.log(up);
+  const increasedVolume = vedioPredsent.volume + 0.1;
+  vedioPredsent.volume = increasedVolume;
+  //console.log(increasedVolume);
   
 };
 
@@ -84,12 +84,13 @@ const volumedownHandler = () => {
     if (vedioPredsent == null) {
       return;
   };
-  if(vedioPredsent.volume = 0){
+  if(vedioPredsent.volume <= 0.1){
+    videoPresent.volume = 0;
     return;
   }
-const down = vedioPredsent.volume - 0.3 ;
-vedioPredsent.volume = down;
-console.log(down);
+const decreasedVolume = vedioPredsent.volume - 0.1;
+vedioPredsent.volume = decreasedVolume;
+//console.log(decreasedVolume);
 
 };
 
