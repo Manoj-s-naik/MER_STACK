@@ -42,7 +42,8 @@ const speedupHandler = () => {
  vedioPredsent.playbackRate = increasedSpeed;
 //  console.log(increasedSpeed); //uncomment this line for see the speed of the vedio.
 //  console.log(vedioPredsent.playbackRate); uncomment this line for see the current or default speed of the vedio.
- 
+const currentSpeed = vedioPredsent.playbackRate;
+ showToast(currentSpeed + "X");
 }
 
 
@@ -57,7 +58,8 @@ const speedDownHandler = () => {
   const decreasedSpeed = vedioPredsent.playbackRate - 0.5;
   vedioPredsent.playbackRate = decreasedSpeed;
    //console.log(decreasedSpeed); //=>bug 
-  
+   const currentSpeed = vedioPredsent.playbackRate;
+   showToast(currentSpeed + "X");
 };
 
 
@@ -74,6 +76,9 @@ const volumeupHandler = () => {
   const increasedVolume = vedioPredsent.volume + 0.1;
   vedioPredsent.volume = increasedVolume;
   //console.log(increasedVolume);
+
+  const percentage = (increasedVolume * 100) + "%";
+  showToast(percentage);
   
 };
 
@@ -91,6 +96,8 @@ const volumedownHandler = () => {
 const decreasedVolume = vedioPredsent.volume - 0.1;
 vedioPredsent.volume = decreasedVolume;
 //console.log(decreasedVolume);
+const percentage = (decreasedVolume * 100) + "%";
+  showToast(percentage);
 
 };
 
@@ -107,8 +114,23 @@ const repeatVedio = () => {
   vedioPredsent.loop = true;
 };
 
+
+
 speedUp.addEventListener("click", speedupHandler);
 speedDown.addEventListener("click", speedDownHandler);
 volumeUp.addEventListener("click", volumeupHandler);
 volumeDown.addEventListener("click", volumedownHandler);
 loopVedio.addEventListener("click", repeatVedio);
+
+
+const toast = document.querySelector(".toast");
+
+
+const showToast = (message)=>{
+  toast.textContent= message;
+  toast.style.display = "block";
+  setTimeout(() => {
+    toast.style.display = "none";
+    
+  }, 1000);
+}

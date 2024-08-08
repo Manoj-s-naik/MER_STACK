@@ -3,80 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLC Media Player Clone</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #282c34;
-            margin: 0;
-        }
-        .player {
-            background-color: #1e1e1e;
-            border: 1px solid #444;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-        video {
-            width: 100%;
-            border: 1px solid #444;
-            border-radius: 5px;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .controls button {
-            background-color: #444;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin: 0 5px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .controls button:hover {
-            background-color: #666;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <div class="player">
-        <video id="video" controls>
-            <source src="../VLC_MEDIA/Assets/vdm_download_file.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="controls">
-            <button id="play">Play</button>
-            <button id="pause">Pause</button>
-            <button id="stop">Stop</button>
-        </div>
-    </div>
-
     <script>
-        const video = document.getElementById('video');
-        const playButton = document.getElementById('play');
-        const pauseButton = document.getElementById('pause');
-        const stopButton = document.getElementById('stop');
-
-        playButton.addEventListener('click', () => {
-            video.play();
-            video.controls=true;
-        });
-
-        pauseButton.addEventListener('click', () => {
-            video.pause();
-        });
-
-        stopButton.addEventListener('click', () => {
-            video.pause();
-            video.currentTime = 0;
-        });
+        const a = 0.1;
+        const b = 100;
+        const c= a*b;
+        console.log(c);
+        
     </script>
 </body>
 </html>
