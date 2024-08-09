@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html, body {
+    height: 100%; /* Ensure the container can take up the full viewport height */
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.box1 {
+    height: 400px;
+    width: 600px;
+    background-color: rgb(32, 194, 102);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2 {
+    height: 100px;
+    width: 100px;
+    background-color: rgb(207, 193, 220);
+    animation-name: shape-changer;
+    animation-duration: 4s;
+}
+@keyframes shape-changer {
+    25%{
+        border-radius: 50%;
+    }
+    50%{
+        background-color: brown;
+    }
+    75%{
+        background-color: aliceblue;
+    }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box1">
+        <div class="box2"></div>
+      </div>
+    </div>
+  </body>
+</html>
