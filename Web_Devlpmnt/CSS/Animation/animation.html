@@ -24,14 +24,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.box2 {
+    animation-name: change-bg;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+  
+  .box2 {
     height: 100px;
     width: 100px;
     background-color: rgb(207, 193, 220);
     animation-name: shape-changer;
     animation-duration: 4s;
+    animation-iteration-count: infinite;
 }
 @keyframes shape-changer {
     25%{
@@ -39,11 +43,19 @@
     }
     50%{
         background-color: brown;
-    }
-    75%{
+      }
+      75%{
         background-color: aliceblue;
+      }
     }
-}
+    @keyframes change-bg {
+        25%{
+            border-radius: 50%;
+        }
+        50%{
+            background-color: brown;
+        }
+      }
 
     </style>
   </head>
