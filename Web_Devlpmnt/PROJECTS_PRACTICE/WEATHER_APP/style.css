@@ -1,0 +1,31 @@
+html {
+    font-family: sans-serif;
+}
+header {
+    height: 100px;
+    background-color: slategray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.searchBtn {
+    background-color: rgb(17, 230, 159);
+
+}
+
+main {
+    height: calc(100vh - 100px);
+    background-color: rgb(27, 42, 57);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-container {
+    display: flex;
+    gap: 1rem;
+}
