@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    BASIC LEVEL ASYCH CODE IN JS
+</body>
+<script>
+    // console.log("before");
+    // const  viewResponse = async ()=>{
+        // console.log("i am access");
+        
+        // const response = await fetch("http://api.weatherapi.com/v1/current.json?key=41b4b713c0e04ac1b6a152336241008&q=London&aqi=no");
+        // console.log(response);
+        
+        // console.log( await response.json());
+        // console.log( await response.status);
+        // if(response.status == 400){
+            // console.log("data found");
+            
+            
+//         }
+//         console.log("i am after access");
+//         console.log(await response.json());
+        
+        
+        
+//     }
+//   viewResponse();
+//     console.log("after");
+const viewResponse = async ()=>{
+    const response = await fetch("http://api.weatherapi.com/v1/current.json?key=41b4b713c0e04ac1b6a152336241008&q=London&aqi=no")
+    if(response.status==400){
+        console.log("data found");
+    } else if(response.status==200){
+        const json = await response.json();
+        console.log("data found");
+        console.log(json);
+        
+        
+            
+    }
+}
+viewResponse();
+
+</script>
+</html>
