@@ -32,14 +32,37 @@
     </main>
 </body>
 <script>
-    // const searchBtn = document.querySelector(".searchBtn");
+    const searchBtn = document.querySelector(".searchBtn");
+    const searchInput = document.querySelector("input");
 
-    // const searchPlace =()=>{
-    //     alert("location ")
-    // }
 
-    // searchBtn.addEventListener("click",searchPlace);
-    
+
+    const searchLocation = () => {
+        const location = searchInput.value;
+        if (location !== "") {
+            const Data = fetchWeather(location);
+            
+            
+            searchInput.value = "";
+        }
+        
+    }
+
+    const fetchWeather = async (location) => {
+        const url = `http://api.weatherapi.com/v1/current.json?key=41b4b713c0e04ac1b6a152336241008&q=${location}&aqi=no`;
+        const response = await fetch (url);
+        if (response.status == 404) {
+            console.log("data not found");
+
+        } else if (response.status == 200) {
+            const json = await response.json();
+            console.log(json);
+
+        }
+    }
+
+    searchBtn.addEventListener("click", searchLocation);
+
 </script>
 
 </html>

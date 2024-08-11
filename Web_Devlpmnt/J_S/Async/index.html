@@ -34,7 +34,7 @@
 const viewResponse = async ()=>{
     const response = await fetch("http://api.weatherapi.com/v1/current.json?key=41b4b713c0e04ac1b6a152336241008&q=London&aqi=no")
     if(response.status==400){
-        console.log("data found");
+        console.log("data not found");
     } else if(response.status==200){
         const json = await response.json();
         console.log("data found");
