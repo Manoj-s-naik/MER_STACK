@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react algorithm -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- react-dom algorithm -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <h1>React basic JSX example</h1>
+    <div id="root">
+
+    </div>
+</body>
+<script type="text/babel">
+    const rootElmnt = document.getElementById("#root");
+
+    const Heading =(props)=>{
+        const name = props.name;
+        const age = props.age;
+        return <h1>hai i am  {name}and i am {age} year old </h1>
+    }
+    ReactDOM.render(<Heading name={"manoj"} age ={21} ></Heading>, rootElmnt);
+</script>
+
+</html>

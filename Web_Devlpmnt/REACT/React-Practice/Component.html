@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react algorithm -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- react-dom algorithm -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <h1 style="text-align: center;">React basic Component example</h1>
+    <p>COMPONENT COMPOSITION</p>
+    <div class="root">
+
+    </div>
+</body>
+<script type="text/babel">
+    const rootElmnt = document.querySelector(".root");
+
+    const Heading =(props)=>{
+        const name = props.name;
+        const age = props.age;
+        return <p >hai i am  {name} , and i am {age} year old </p>
+    }
+    const HeadingParent = ()=>{
+        return <div>
+            <Heading name={"manoj"} age={21} ></Heading>
+            <Heading name={"mallika"} age={23}></Heading>
+            <Heading name={"megha"} age={25}></Heading>
+            <Heading name={"bangari"} age={48}></Heading>
+            <Heading name={"shekhar"} age={51}></Heading>
+        </div>
+    }
+
+    ReactDOM.render(<HeadingParent></HeadingParent>,rootElmnt);
+</script>
+
+</html>
