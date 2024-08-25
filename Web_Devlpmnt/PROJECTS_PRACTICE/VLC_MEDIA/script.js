@@ -110,6 +110,7 @@ const repeatVedio = () => {
     return;
   }
   vedioPredsent.loop = true;
+  alert("loop started")
 };
 
 

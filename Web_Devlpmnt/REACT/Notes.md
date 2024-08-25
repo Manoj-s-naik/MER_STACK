@@ -1,31 +1,18 @@
-# REACT IMPORTANT 
-
-# components in react :- its normally functions that returns html elements
-# components in props :- it is the way to pass data to a component.
+# when you build the application in React follow the steps
 
 
-# why react 
-    code mantain 
-    for single page application
-    work devision or devide like components
-    Performance 
+# BUILD THE STATIC UI => FLOW OF THE APPLICATION
 
-# JSX :-- Extension
+# CHECK FOR THE INTERACTIVITY => EXMPLE FOR EVENTLISTENERS
 
-    Easy way to convert or read the html 
+# IDENTIFY THE DYNAMIC DATA 
+    1. FORM 
+    2. ADD THAT TO THE STATE
 
+# ADD THE STATE TO YOUR COMPONENT
+
+# FILL THE LOGIC => according to the user interaction.
 
 
 
-
-# babel :-- its a transfiler html tags to jsx
-
-
-# Component :-- returns html
-
-# Component :-- when we put the component inside the component is called component composition.
-
-# props :-- we can send the data to the components
-
-
-
+# DEVIDE THE CODE INTO REUSABLE COMPONENT

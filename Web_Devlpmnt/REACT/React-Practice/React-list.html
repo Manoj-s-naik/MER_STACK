@@ -31,19 +31,21 @@
 </body>
 <script type="text/babel">
     const rootElmnt = document.getElementById("root");
-    const inner = (elmnt) => {
-        return <li>
+    const inner = (elmnt,index) => {
+        return ( <li key={index}>
             <div>{elmnt}</div>
             <button>click me</button>
         </li>
+    );
 
     }
     const ShoppingCart = () => {
         const cart = ["apple", "banana", "grapes", "cherry", "blackberry", "guava"];
-        return <div>
+        return (<div>
             <ul>{cart.map(inner)}</ul>
 
         </div>
+    );
     }
 
 

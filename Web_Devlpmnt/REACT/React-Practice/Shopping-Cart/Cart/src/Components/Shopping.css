@@ -1,0 +1,24 @@
+.shoppingList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.inputContainer {
+    position: relative;
+    top: 1rem;
+}
+.list {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    top: 3rem;
+    display: flex;
+}
+
+button {
+    margin-left: 1rem;
+}
+
+
+

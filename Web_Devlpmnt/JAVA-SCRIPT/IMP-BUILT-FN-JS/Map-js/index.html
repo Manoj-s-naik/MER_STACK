@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <link rel="icon" href="data:," />
+  </head>
 
-<body>
+  <body>
     <h1>MAP FUCTION IN JS</h1>
-</body>
-<script>
-    const fn = (a) => {
-        return a * a;
-    };
+  </body>
+  <script>
+    // const fn = (a) => {
+    //     return a * a;
+    // };
+    // let arr = [10, 20, 30, 40];
+    // const newArray = arr.map(fn);
+    // console.log(newArray);
     let arr = [10, 20, 30, 40];
-    const newArray = arr.map(fn);
-    console.log(newArray);
-</script>
+    const newArray = arr.map((item) => {
+        return item;
+    });
 
+    console.log(newArray);
+  </script>
 </html>
