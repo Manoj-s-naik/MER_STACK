@@ -1,0 +1,67 @@
+
+.Admission-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Input container styling for the form fields */
+  .InputContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 800px; /* Adjust as needed */
+  }
+  
+  /* Each input field styling */
+  .input-field {
+    flex: 1 1 45%; /* Take up roughly half of the width */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* Label styling */
+  label {
+    margin-bottom: 5px;
+  }
+  
+  /* Input styling */
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Submit button styling */
+  .submit {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  
+  /* Result container styling */
+  .input-result {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* List styling */
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  p {
+    display: none;
+  }
+  

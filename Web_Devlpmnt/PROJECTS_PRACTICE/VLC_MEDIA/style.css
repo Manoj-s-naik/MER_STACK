@@ -101,7 +101,8 @@ header{
 
 .rest-options {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
     margin-left: 50%;
 }
