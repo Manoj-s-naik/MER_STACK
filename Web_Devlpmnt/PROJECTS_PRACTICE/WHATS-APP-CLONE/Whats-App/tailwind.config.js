@@ -5,7 +5,15 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}', // Adjust based on your framework
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#04a784",
+        "primary-dense": "#008069",
+        background: "#eff2f5",
+        "chat-bg": "#F2EFE9",
+        "primary-light":"#D9FDD2"
+      }
+    },
   },
   plugins: [],
 }
