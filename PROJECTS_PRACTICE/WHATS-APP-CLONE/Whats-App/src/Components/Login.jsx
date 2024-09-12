@@ -1,12 +1,34 @@
 import React, { useState } from 'react'
 import { Fingerprint, LogIn as LoginIcon } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+import { auth } from '../../Firebase';
+import { signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
-function Login() {
-const [isLoggedin, setLoggedin]=useState(false);
 
-const handleLogin =()=>{
-  alert("login");
+const createUser = (authData)=>{
+  const userObject = authData.user;
+  const id = userObject.uid;
+  const photUrl = userObject.protoURL;
+  const name = userObject.displayName;
+  const email = userObject.email;
+  console.log(userObject,id,photUrl,name,email);
+  
 }
+
+function Login(props) {
+  const setLoggedin = props.setLoggedin;
+
+
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    const userData = await signInWithPopup(auth,new GoogleAuthProvider);  
+    // console.log(userData);  
+    createUser(userData)
+    setLoggedin(true);
+    // alert("login")
+    navigate("/");
+  };
 
   return (
     <>

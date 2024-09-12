@@ -11,20 +11,12 @@ function Home(props) {
     await signOut(auth);
     navigate("/login");
   };
-  const visitChat = () => {
-    setLoggedin(true);
-    navigate("/chat/uniqueChat");
-  };
-  const visitUser = () => {
-    setLoggedin(true);
-    navigate("/user");
-  };
+  
+  
 
   return (
     <>
       <h1>Homepage</h1>
-      <button onClick={visitChat}>Chat</button>
-      <button onClick={visitUser}>User</button>
       <button onClick={handleLogout}>Logout</button>
     </>
   );

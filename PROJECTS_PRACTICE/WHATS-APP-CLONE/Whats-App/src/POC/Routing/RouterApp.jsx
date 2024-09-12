@@ -12,9 +12,8 @@ function RouterApp() {
   return (
     <Routes>
       <Route path="/" element={<ProtectedRoute isLoggedin={isLoggedin}><Home setLoggedin={setLoggedin} /></ProtectedRoute>} />
-      <Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
+      <Route path="/login" element={<Login setLoggedin={setLoggedin} isLoggedin={isLoggedin} />} />
       <Route path="/chat/uniqueChat" element={<ProtectedRoute isLoggedin={isLoggedin}><Chat /></ProtectedRoute>} />
-      <Route path="/user" element={<ProtectedRoute isLoggedin={isLoggedin}><User /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
