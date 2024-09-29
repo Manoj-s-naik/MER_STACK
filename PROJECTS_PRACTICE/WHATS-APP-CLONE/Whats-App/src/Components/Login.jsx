@@ -1,39 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { Fingerprint, LogIn as LoginIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../Firebase";
-import { signInWithPopup } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const createUser = async (authData) => {
-  const userObject = authData.user;
-  // const id = userObject.uid;
-  // const photURL = userObject.photoURL;
-  // const name = userObject.displayName;
-  // const email = userObject.email;
-  // console.log(userObject,id,photUrl,name,email);
-  const { uid, photoURL, displayName, email } = userObject;
-
+  const { uid, photoURL, displayName, email } = authData.user;
   await setDoc(doc(db, "users", uid), {
-    email:email,
+    email,
     profile_pic: photoURL,
     name: displayName,
   });
-  console.log("user data added");
 };
 
-function Login(props) {
-  const setLoggedin = props.setLoggedin;
-
-  const navigate = useNavigate();
+function Login() {
+  const Navigate = useNavigate();
   const handleLogin = async () => {
-    const userData = await signInWithPopup(auth, new GoogleAuthProvider());
-    // console.log(userData);
-    createUser(userData);
-    setLoggedin(true);
-    // alert("login")
-    navigate("/");
+    const UserData = await signInWithPopup(auth, new GoogleAuthProvider());
+    await createUser(UserData);
+    Navigate("/")
   };
 
   return (
