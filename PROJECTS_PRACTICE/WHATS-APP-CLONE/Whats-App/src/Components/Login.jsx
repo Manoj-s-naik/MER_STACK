@@ -1,27 +1,32 @@
+// rfce
 import React from "react";
 import { Fingerprint, LogIn as LoginIcon } from "lucide-react";
-import { auth, db } from "../../Firebase";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// auth-step-3
+import { signInWithPopup } from "firebase/auth";
+import { auth, db } from "../../firebase";
+import { GoogleAuthProvider } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
-const createUser = async (authData) => {
-  const { uid, photoURL, displayName, email } = authData.user;
+async function createUser(authData) {
+  const userObject = authData.user;
+  const { uid, photoURL, displayName, email } = userObject;
   await setDoc(doc(db, "users", uid), {
     email,
     profile_pic: photoURL,
     name: displayName,
   });
-};
-
+}
 function Login() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLogin = async () => {
-    const UserData = await signInWithPopup(auth, new GoogleAuthProvider());
-    await createUser(UserData);
-    Navigate("/")
+    // login wala logic
+    // auth-step-4
+    const userData = await signInWithPopup(auth, new GoogleAuthProvider());
+    await createUser(userData);
+    // alert("login");
+    navigate("/");
   };
-
   return (
     <>
       <div className="h-[220px] bg-primary">

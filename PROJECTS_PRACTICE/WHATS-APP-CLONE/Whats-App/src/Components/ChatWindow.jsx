@@ -1,103 +1,162 @@
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { MessageSquareText, PlusIcon, SendIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
+// useParams
 import { useParams } from "react-router-dom";
-import { MessageSquareText, Smile, Plus, SendHorizontal } from "lucide-react";
-import { doc, getDoc } from 'firebase/firestore'; 
-import {db} from "../../Firebase"
-
+import { db } from "../../firebase";
+import { useAuth } from "./AuthContext";
 
 function ChatWindow() {
-  const [message, setMessage] = useState("");
   const params = useParams();
-  const [secondUser, setsecondUser] = useState();
+  const [secondUser, setSecondUser] = useState();
+  const [msg, setMsg] = useState("");
+  const receiverId = params.chatid;
+  const [msgList, setMsgList] = useState([]);
+  const { userData } = useAuth();
 
-  const recieverId = params.chatid;
-
-  const selectMessage = (obj) => {
-    setMessage(obj.target.value);
-  };
-
-  const handleSendMessage = () => {
-    setMessage("");
-  };
+  /**
+   * This is done to generate a unique chat id between two user based on user id.
+   */
+  const chatId =
+    userData?.id > receiverId
+      ? `${userData.id}-${receiverId}`
+      : `${receiverId}-${userData?.id}`;
 
   useEffect(() => {
-    // Function to request and fetch data
     const getUser = async () => {
-      const docRef = doc(db, "users", recieverId);
+      const docRef = doc(db, "users", receiverId);
       const docSnap = await getDoc(docRef);
-  
+
       if (docSnap.exists()) {
-        console.log("second user",docSnap.data());
-        setsecondUser(docSnap.data()); 
+        setSecondUser(docSnap.data());
       }
     };
-  
-    if (recieverId) {
-      getUser(); 
-    }
-  }, [recieverId]);
 
-  // send message function for "ENTER KEY"
-  const sendwithEnter = (Event) => {
-    if (Event.key === "Enter") {
-      handleSendMessage();
+    const msgUnsubscribe = onSnapshot(doc(db, "user-chats", chatId), (doc) => {
+      setMsgList(doc.data()?.messages || []);
+    });
+
+    getUser();
+
+    return () => {
+      msgUnsubscribe();
+    };
+  }, [receiverId]);
+
+  const sendMsg = async () => {
+    // msg should not be empty
+    if (msg) {
+      const date = new Date();
+      const timeStamp = date.toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      });
+      if (msgList?.length === 0) {
+        await setDoc(doc(db, "user-chats", chatId), {
+          chatId: chatId,
+          messages: [
+            {
+              text: msg,
+              time: timeStamp,
+              sender: userData.id,
+              receiver: receiverId,
+            },
+          ],
+        });
+      } else {
+        console.log(msg, timeStamp, userData.id, "seocndUser", secondUser);
+
+        await updateDoc(doc(db, "user-chats", chatId), {
+          chatId: chatId,
+          // arrayUnion is used here to append to last message to the array list.
+          messages: arrayUnion({
+            text: msg,
+            time: timeStamp,
+            sender: userData.id,
+            receiver: receiverId,
+          }),
+        });
+      }
+      setMsg("");
     }
-    return;
   };
 
-  if (!recieverId) {
+  // default screen if there is no user is selected
+  if (!receiverId)
     return (
-      <>
-        {/* Empty screen code */}
-        <section className="w-[70%] h-full flex flex-col gap-4 items-center justify-center">
-          <MessageSquareText
-            className="w-28 h-28 text-gray-400"
-            strokeWidth={1.2}
-          />
-          <p className="text-sm text-center text-gray-400">
-            select any contact to
-            <br />
-            start a chat with.
-          </p>
-        </section>
-      </>
+      <section className="w-[70%] h-full flex flex-col gap-4 items-center justify-center">
+        <MessageSquareText
+          className="w-28 h-28 text-gray-400"
+          strokeWidth={1.2}
+        />
+        <p className="text-sm text-center text-gray-400">
+          select any contact to
+          <br />
+          start a chat with.
+        </p>
+      </section>
     );
-  }
 
   return (
     <section className="w-[70%] h-full flex flex-col gap-4 items-center justify-center">
       <div className="h-full w-full bg-chat-bg flex flex-col">
-        {/* top bar */}
+        {/* Top bar */}
         <div className="bg-background py-2 px-4 flex items-center gap-2 shadow-sm">
           <img
-            src={secondUser?.profile_pic||"/user-icon.svg"}
-            alt="User Icon"
+            src={secondUser?.profile_pic || "/default-user.png"}
+            alt="profile picture"
             className="w-9 h-9 rounded-full object-cover"
           />
-          <h3>{secondUser?.name}</h3>
+          <div>
+            <h3>{secondUser?.name}</h3>
+            {secondUser?.lastSeen && (
+              <p className="text-xs text-neutral-400">
+                last seen at {secondUser?.lastSeen}
+              </p>
+            )}
+          </div>
         </div>
+        <div className="flex-grow flex flex-col gap-12 p-6 overflow-y-scroll">
+          {/* chat messages */}
+          {/*... */}
 
-        {/* message list */}
-        <div className="flex-grow flex flex-col gap-12 p-6"></div>
-
-        {/* chat input */}
-        <div className="flex shadow pl-2 bg-chat-bg items-center gap-6">
-          <Smile size={16} strokeWidth={1} />
-          <Plus size={16} strokeWidth={1.5} />
+          {msgList?.map((m, index) => (
+            <div
+              key={index}
+              data-sender={m.sender === userData.id}
+              // break-words is the edge case where a single word is quite long, so we need to break that word before it breaks our ui.
+              className={`bg-white  w-fit rounded-md p-2 shadow-sm max-w-[400px] break-words data-[sender=true]:ml-auto data-[sender=true]:bg-primary-light `}
+            >
+              <p>{m?.text}</p>
+              <p className="text-xs text-neutral-500  text-end">{m?.time}</p>
+            </div>
+          ))}
+        </div>
+        <div className="bg-background py-3 px-6 shadow flex items-center gap-6">
+          <PlusIcon />
           <input
-            type="text"
-            onChange={selectMessage}
-            value={message}
-            placeholder="Type a message.."
-            className="flex-grow border-0 focus:outline-none focus:ring-0 bg-gray-100 p-2"
+            value={msg}
+            onChange={(e) => {
+              setMsg(e.target.value);
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                handleSendMessage();
+                sendMsg();
               }
             }}
+            className="w-full py-2 px-4 rounded  focus:outline-none"
+            placeholder="Type a message..."
           />
-          <button onClick={handleSendMessage}>
-            <SendHorizontal size={16} strokeWidth={1.5} />
+          <button onClick={sendMsg}>
+            <SendIcon />
           </button>
         </div>
       </div>

@@ -1,81 +1,103 @@
 import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../../Firebase";
+import { useEffect, useState } from "react";
+import React from "react";
+import { db } from "../../firebase";
 import {
-  CircleUserRound,
+  CircleFadingPlusIcon,
+  Loader2Icon,
   MessageSquare,
-  SunMoon,
-  BadgePlus,
-  Search,
+  SearchIcon,
+  UserRoundIcon,
 } from "lucide-react";
 import Profile from "./Profile";
 import UserCard from "./UserCard";
+import { useAuth } from "./AuthContext";
 
 function ChatPanel() {
+  {
+    /* list of users leke aane from your firebase */
+  }
   const [users, setUsers] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [showProfile, setshowProfile] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { userData } = useAuth();
 
   useEffect(() => {
     const getUsers = async () => {
-      // getDocs ,db,collection given by firebase just you can pass the  collection then it gives data from passed ex:-users
-      const snapShot = await getDocs(collection(db, "users"));
-      // console.log(data.docs.length);
-      //
-      const arrayOfUsers = snapShot.docs.map((doc) => {
-        return { userData: doc.data(), id: doc.id };
+      // isme collection pass and data milta hai
+      const data = await getDocs(collection(db, "users"));
+      const arrayOfUser = data.docs.map((docs) => {
+        return { userData: docs.data(), id: docs.id };
       });
-      setUsers(arrayOfUsers);;
+      console.log("18", arrayOfUser);
+      setUsers(arrayOfUser);
       setLoading(false);
     };
+
     getUsers();
   }, []);
 
-  const onBack = () => {
-    setshowProfile(false);
-  };
+  let filterdUsers = users;
+  if (searchQuery) {
+    // filter chats based on search query
+    filterdUsers = users.filter((user) =>
+      user.userData.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+    );
+  }
 
+  const onBack = () => {
+    setShowProfile(false);
+  };
   if (showProfile == true) {
     return <Profile onBack={onBack} />;
   }
 
   return (
-    <div className="bg-white w-[30vw]">
-      <div className="flex justify-between items-center bg-background h-[3rem]">
-        <div>
-          <button
-            onClick={() => {
-              setshowProfile(true);
-            }}
-          >
-            <img src={"/user-icon.svg"} alt="User Icon" />
-          </button>
-        </div>
-        <div className="flex space-x-4 ml-auto">
-          <MessageSquare />
-          <SunMoon />
-          <BadgePlus />
-          <CircleUserRound />
+    <div className="bg-white w-[30vw] min-w-[350px]">
+      {/* top-bar */}
+      <div className="bg-background py-2 px-4 border-r  flex justify-between items-center gap-2">
+        <button
+          onClick={() => {
+            setShowProfile(true);
+          }}
+        >
+          <img
+            src={userData.profile_pic || "/default-user.png"}
+            alt="profile picture"
+            className="w-10 h-10 rounded-full object-cover"
+          />
+        </button>
+
+        <div className="flex items-end justify-center gap-6 mx-4">
+          <CircleFadingPlusIcon className="w-6 h-6" />
+          <MessageSquare className="w-6 h-6" />
+          <UserRoundIcon className="w-6 h-6" />
         </div>
       </div>
 
-      <div className="relative">
-        <input
-          type="text"
-          className="border-2 border-gray-300 rounded-md pl-10 pr-4 py-2 w-full focus:outline-none"
-          placeholder="Search..."
-        />
-        <Search className="absolute top-1/2 left-3  -translate-y-1/2 text-gray-500" />
-      </div>
-
-      {/* chat list */}
+      {/* chat List */}
       {isLoading ? (
-        <div>....Loading</div>
+        <div className="h-full w-full flex justify-center items-center">
+          <Loader2Icon className="w-10 h-10 animate-spin" />{" "}
+        </div>
       ) : (
-        <div className="py-3 pb-8 divide-y h-full max-h-[calc(100vh-152px)] overflow-y-scroll">
-          {users.map((userObject) => (
-            <UserCard key={userObject.id} userObject={userObject} />
-          ))}
+        <div className="bg-white py-2 px-3">
+          {/* Search Bar  */}
+          <div className="bg-background flex items-center gap-4 px-3 py-2 rounded-lg">
+            <SearchIcon className="w-4 h-4" />
+            <input
+              className="bg-background focus-within:outline-none"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <div className="py-4 divide-y h-full max-h-[calc(100vh-152px)] overflow-y-scroll">
+            {filterdUsers.map((userObject) => (
+              <UserCard userObject={userObject} key={userObject.id} />
+            ))}
+          </div>
         </div>
       )}
     </div>

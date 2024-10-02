@@ -1,55 +1,60 @@
 import React from "react";
-import { storage } from "../../Firebase";
-// import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import ChatPanel from "./ChatPanel";
 import ChatWindow from "./ChatWindow";
 
 function Home() {
-  //   const handleChange = (Obj)=>{
-  //   const img = Obj.target.files[0];
+  // const handleChange = (e) => {
+  //   console.log("Change Event");
+  //   const img = e.target.files[0];
 
-  //   // address:--Creates a reference to a location in Firebase Storage where you want to store the file.
-  //   const storageRef = ref(storage,"/profile" + Math.random());
+  //   // address
+  //   const storageRef = ref(storage, "/profile" + Math.random());
 
-  //   // storage task
-  //   const uploadTask = uploadBytesResumable(storageRef,img);
-  //   console.log("upload task");
-  //   // Listens to changes in the upload process. You can attach event listeners for different stages,
-  //   uploadTask.on("storage_changed",progressCB,errorCB,finishedCB);
+  //   // strorage task
+  //   const uploadTask = uploadBytesResumable(storageRef, img);
+  //   console.log("upload task ")
+  //   // developer
+  //   uploadTask.on("state_changed", progressCB, errorCB, finishedCb);
 
   //   // upload
   //   function progressCB(data) {
-  //     console.log("data is progressing",data);
-
+  //     console.log("data", data);
   //   }
-
-  // // if error
+  //   // if error
   //   function errorCB(err) {
-  //     console.log("error occured",err);
-
+  //     //
+  //     console.log("err", err);
   //   }
-  // // on success
-  //   function finishedCB() {
+  //   // on success
+  //   function finishedCb() {
   //     console.log("successfully file uploaded");
-  //     getDownloadURL(uploadTask.snapshot.ref).then(function (url){
-  //       console.log("url",url);
-
+  //     getDownloadURL(uploadTask.snapshot.ref).then(function (url) {
+  //       console.log("url", url);
   //     })
 
   //   }
 
-  //   }
-  return (
-    <>
-      {/* <input type="file" onChange={handleChange} accept=".jpg, .jpeg, .png, image/*" /> */}
+  // }
 
-      <main className="bg-[#e9f0f3] h-screen w-full ">
-        <div className="bg-[#eff2f5] w-full h-full shadow-md flex">
+  return (
+    <main className="relative w-full h-screen bg-[#E3E1DB]">
+      {/* <input type='file'
+        accept='image/png image/jpeg image/webp'
+        onChange={handleChange}
+      ></input> */}
+      <div className="absolute top-0 h-[130px] bg-primary  w-full" />
+
+      <div className="absolute p-5 top-0 h-screen w-full">
+        <div className="bg-background w-full h-full shadow-md flex">
+          {/* conditonal rehne waale hai -> chat list , profile */}
           <ChatPanel />
-          <ChatWindow />
+          {/* <div>Empty Chat</div>:<div>Individual CHat</div> */}
+          <ChatWindow></ChatWindow>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
 
