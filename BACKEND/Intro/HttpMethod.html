@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <button id="get">GetReq</button>
+      <button id="post">PostReq</button>
+      <button id="update">UpdateReq</button>
+      <button id="delete">DeleteReq</button>
+    </div>
+  </body>
+  <script>
+    const getBtn = document.querySelector("#get");
+    const updateBtn = document.querySelector("#update");
+    const postBtn = document.querySelector("#post");
+    const deleteBtn = document.querySelector("#delete");
+
+    getBtn.addEventListener("click", async () => {
+      const url = await fetch("https://dummyjson.com/posts/1", {
+        method: "GET",
+      });
+      const responseData = await url.json();
+      console.log("status", url.status);
+      console.log("body", responseData);
+    });
+
+    postBtn.addEventListener("click", async () => {
+      const url = await fetch("https://dummyjson.com/posts/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: "I am in love with someone.",
+          userId: 5,
+        }),
+      });
+      const responseData = await url.json();
+      console.log("status", url.status);
+      console.log("body", responseData);
+    });
+
+    deleteBtn.addEventListener("click", async () => {
+      const url = await fetch("https://dummyjson.com/posts/1", {
+        method: "DELETE",
+      });
+      const responseData = await url.json();
+      console.log("status", url.status);
+      console.log("body", responseData);
+    });
+
+    updateBtn.addEventListener("click", async () => {
+      const url = await fetch("https://dummyjson.com/posts/1", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: "I think I should shift to the moon",
+        }),
+      });
+      const responseData = await url.json();
+      console.log("status", url.status);
+      console.log("body", responseData);
+    });
+  
+  </script>
+</html>

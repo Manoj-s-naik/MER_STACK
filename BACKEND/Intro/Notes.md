@@ -1,0 +1,6 @@
+# STATUS CODE 
+# 1xx :-- INFORMATIONAL
+# 2xx :-- SUCCESS
+# 3xx :-- REDIRECTIONAL
+# 4xx :-- CLIENT ERROR
+# 5xx :-- SECURE ERROR 
