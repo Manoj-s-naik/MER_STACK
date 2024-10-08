@@ -1,0 +1,99 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "His mother had always taught him",
+      "body": "His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
+      "tags": [
+        "history",
+        "american",
+        "crime"
+      ],
+      "reactions": {
+        "likes": 192,
+        "dislikes": 25
+      },
+      "views": 305,
+      "userId": 121
+    },
+    {
+      "id": 2,
+      "title": "The sudden storm",
+      "body": "The storm came without warning, catching everyone off guard. The once clear sky was now filled with dark clouds, and the streets were soon flooded with heavy rain. She quickly sought shelter in the nearest building.",
+      "tags": [
+        "weather",
+        "nature",
+        "drama"
+      ],
+      "reactions": {
+        "likes": 250,
+        "dislikes": 12
+      },
+      "views": 450,
+      "userId": 122
+    },
+    {
+      "id": 3,
+      "title": "A day at the museum",
+      "body": "Visiting the museum was always a highlight of his week. The exhibits of ancient artifacts and modern art provided an escape from his daily life. He wandered from room to room, absorbing the history and stories told by the objects.",
+      "tags": [
+        "culture",
+        "art",
+        "history"
+      ],
+      "reactions": {
+        "likes": 310,
+        "dislikes": 19
+      },
+      "views": 600,
+      "userId": 123
+    },
+    {
+      "id": 4,
+      "title": "The lost treasure",
+      "body": "Legends spoke of a treasure hidden deep within the mountains, guarded by ancient spirits. Many had tried to find it, but none had returned. Yet, he was determined to uncover the truth behind the stories.",
+      "tags": [
+        "adventure",
+        "mystery",
+        "fantasy"
+      ],
+      "reactions": {
+        "likes": 400,
+        "dislikes": 30
+      },
+      "views": 820,
+      "userId": 124
+    },
+    {
+      "id": 5,
+      "title": "A walk through the city",
+      "body": "The bustling city never seemed to sleep. As she walked through the streets, the sounds of traffic, conversations, and distant music filled the air. She felt alive amidst the chaos, finding peace in the noise.",
+      "tags": [
+        "urban",
+        "life",
+        "travel"
+      ],
+      "reactions": {
+        "likes": 150,
+        "dislikes": 10
+      },
+      "views": 300,
+      "userId": 125
+    },
+    {
+      "title": "i am living for the family",
+      "userId": 8
+    },
+    {
+      "title": "i am living for the family",
+      "userId": 8,
+      "name": "manoj"
+    },
+    {
+      "name": "manoj"
+    },
+    {
+      "name": "manoj"
+    }
+  ]
+}
