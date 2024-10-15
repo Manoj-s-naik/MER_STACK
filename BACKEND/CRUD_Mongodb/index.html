@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>view users</button>
+    <h1>username</h1>
+    <p></p>
+  </body>
+  <script>
+    const button = document.querySelector("button");
+    const user = document.querySelector("h1");
+    const userName = document.querySelector("p");
+    const viewUser = async () => {
+      try {
+        const url = `http://localhost:3000/user`; 
+        const response = await fetch(url); 
+        if (!response.ok) {
+          throw new Error("Network response was not ok"); 
+        }
+        const userData = await response.json(); 
+        console.log(userData);
+        userName.innerText =  userData.message[0].name;
+       
+      } catch (error) {
+        console.error("Failed to fetch users:", error); 
+      }
+    };
+
+    button.addEventListener("click", viewUser);
+  </script>
+</html>
