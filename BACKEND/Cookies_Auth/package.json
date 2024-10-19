@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon Api.js"
+    "start": "nodemon ./Jwt_Tokens/api.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "cookie-parser": "^1.4.7",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2"
   }
 }

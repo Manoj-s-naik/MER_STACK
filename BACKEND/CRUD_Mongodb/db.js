@@ -3,9 +3,6 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 
-const cors = require("cors");
-app.use(cors());
-
 dotenv.config({ path: "./.env" });
 const dbLink = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.2zfal.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -16,7 +13,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-const schemRules = {
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "name is required"],
@@ -49,9 +46,58 @@ const schemRules = {
     enum: ["user", "admin", "manager"],
     default: "user",
   },
-};
+});
 
-const userSchema = new mongoose.Schema(schemRules);
+const movieSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  discription: {
+    type: String,
+    required: true,
+  },
+  releaseYear: {
+    type: Number,
+    required: true,
+  },
+  genre: {
+    type: String,
+    enum: [
+      "Drama",
+      "Comedy",
+      "Action",
+      "Thriller",
+      "Horror",
+      "Romance",
+      "Sci-Fi",
+      "Animation",
+      "Documentary",
+      "Other",
+    ],
+    required: true,
+  },
+  rating: {
+    type: Number,
+    minlength: 5,
+  },
+  cast: {
+    type: [String],
+  },
+  director: {
+    type: String,
+  },
+  thumbnail: {
+    type: String,
+  },
+  trailerLink: {
+    type: String,
+  },
+  isPremium: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 userSchema.pre("save", function (next) {
   this.password = undefined;
@@ -61,6 +107,7 @@ userSchema.pre("save", function (next) {
 
 // final step
 const userModel = mongoose.model("user", userSchema);
+const movieModel = mongoose.model("movies", movieSchema);
 
 const createUser = async function (req, res) {
   try {
@@ -70,6 +117,19 @@ const createUser = async function (req, res) {
   } catch (err) {
     res.status(500).json({
       message: "internal server error",
+      error: err,
+    });
+  }
+};
+
+const addMovies = async (req, res) => {
+  try {
+    const movieObject = req.body;
+    const movie = await movieModel.create(movieObject);
+    res.status(200).json(movie);
+  } catch (err) {
+    res.status(500).json({
+      message: "internal server  error",
       error: err,
     });
   }
@@ -142,6 +202,7 @@ app.post("/users", createUser);
 app.get("/user", getAlluser);
 app.get("/user/:id", getUserById);
 app.delete("/user/:id", deleteUserById);
+app.post("/movies", addMovies);
 
 app.listen(3000, function () {
   console.log("server started on port 3000");
