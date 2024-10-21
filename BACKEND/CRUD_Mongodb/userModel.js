@@ -18,10 +18,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "password should same"],
     minlength: 6,
-    // validate: function () {
-    //   this.password == confirmPassword;
-    //   return this.password == this.confirmPassword;
-    // }
   },
   createdAt: {
     type: Date,
@@ -34,11 +30,11 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", function (next) {
-  this.password = undefined;
-  this.confirmPassword = undefined;
-  next();
-});
+// userSchema.pre("save", function (next) {
+//   this.password = undefined;
+//   this.confirmPassword = undefined;
+//   next();
+// });
 
 // final step
 const userModel = mongoose.model("user", userSchema);
