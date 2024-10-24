@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["user", "admin", "manager"],
+    enum: ["user", "admin", "manager", "moderator", "fee curator"],
     default: "user",
   },
 });
@@ -39,3 +39,6 @@ const userSchema = new mongoose.Schema({
 // final step
 const userModel = mongoose.model("user", userSchema);
 module.exports = userModel;
+
+
+// admin moderator

@@ -21,7 +21,6 @@ const {
   deleteUserById,
   getUserById,
 } = require("./userController");
-
 const userModel = require("./userModel");
 
 const signUpHandler = async (req, res) => {
@@ -57,7 +56,7 @@ const signUpHandler = async (req, res) => {
 //  for auth token
 const jwt = require("jsonwebtoken");
 const util = require("util");
-const { error } = require("console");
+const movieModel = require("./moviesModel");
 const promisify = util.promisify;
 const promisdiedJWTsign = promisify(jwt.sign);
 const promisdiedJWTverify = promisify(jwt.verify);
@@ -66,17 +65,12 @@ const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
-
     if (!user) {
       return res.status(404).json({
         message: "invalid email",
         status: "failure",
       });
     }
-
-    // console.log("password",password);
-    // console.log("user password",user.password);
-
     const areEqual = password == user.password;
     if (!areEqual) {
       return res.status(401).json({
@@ -135,33 +129,26 @@ const validIsAdmin = async (req, res, next) => {
   const userId = req.id;
   try {
     const loggedInuser = await userModel.findById(userId);
-    if(!loggedInuser){
-    return res.status(404).json({
-      message : "user not found",
-      status : "failure"
-    })
-  } 
-  if(loggedInuser.role == "user"){
-    return res.status(401).json({
-      message : "user role is not have access",
-      status : "failure"
-    })
-  }
-  // if(loggedInuser.role !== "admin"){
-  //   res.status(404).json({
-  //     message : "sorry you are not a admin you dont have any access",
-  //     status : "failure"
-  //   })
-  // }
-  next()
- }
-  catch(err) {
-    console.log("error",err);
+    if (!loggedInuser) {
+      return res.status(404).json({
+        message: "user not found",
+        status: "failure",
+      });
+    }
+    if (loggedInuser.role == "user") {
+      return res.status(401).json({
+        message: "user role is not have access",
+        status: "failure",
+      });
+    }
+    next();
+  } catch (err) {
+    console.log("error", err);
     return res.status(500).json({
-      message : "an error occured",
-      status : "failure",
-      'error' : err
-    })
+      message: "an error occured",
+      status: "failure",
+      error: err,
+    });
   }
 };
 
@@ -187,34 +174,85 @@ const profileHandler = async (req, res) => {
   }
 };
 
-const logoutHandler = (req,res)=>{
- try {
-  res.clearCookie("jwt",{path:"/"});
-  res.json({
-    message : "logout successfully",
-    status : "success"
-  })
- } catch (error) {
-  res.status(500).json({
-    message : "internal error"
-  })
- }
-}
+const logoutHandler = (req, res) => {
+  try {
+    res.clearCookie("jwt", { path: "/" });
+    res.json({
+      message: "logout successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "internal error",
+    });
+  }
+};
+
+const viewAllMovies = async (req, res) => {
+  try {
+    const user = req.user;
+    console.log("role",user.role);
+    
+    if (user.role !== "admin" && user.role !== "moderator" && user.role !== "fee curator") {
+      return res.status(404).json({
+        message: "you dont have access",
+        status: "failure",
+      });
+    } else {
+      const allMovies = await movieModel.findOne();
+      return res.status(200).json({
+        message: "movies found ",
+        movies: allMovies,
+        status: "success",
+      });
+    }
+  } catch (err) {
+    res.status(404).json({
+      message: "there is some issues",
+      status: "failure",
+      error: err,
+    });
+  }
+};
+
+const checkRoleandAccess = async (req, res, next) => {
+  try {
+    const uID = req.id;
+    const user = await userModel.findById(uID);
+    if (!user) {
+      return res.status(404).json({
+        message: "user not found",
+      });
+    }
+    if (!user.role) {
+      return res.status(400).json({
+        message: "user role not found found",
+      });
+    }
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      message: "internal error",
+      error: error,
+    });
+  }
+};
 
 // middleware
 app.use(express.json());
 app.use(cookieParser());
 // routes
-// routes
 app.post("/users", createUser);
-app.get("/user", getAlluser);
+app.get("/users", protectedRouteMiddleware, checkRoleandAccess, getAlluser);
 app.get("/user/:id", getUserById);
-app.delete("/user/:id", deleteUserById);
-app.post("/movies", addMovies);
+app.delete("/user/:id",protectedRouteMiddleware,checkRoleandAccess,deleteUserById);
+app.post("/movie", addMovies);
+app.get("/movies", protectedRouteMiddleware, checkRoleandAccess, viewAllMovies);
 app.post("/sign", signUpHandler);
 app.post("/login", loginHandler);
 app.get("/profile", protectedRouteMiddleware, validIsAdmin, profileHandler);
-app.post("/logout",logoutHandler)
+app.post("/logout", logoutHandler);
 
 app.listen(3000, function () {
   console.log("server started on port 3000");
