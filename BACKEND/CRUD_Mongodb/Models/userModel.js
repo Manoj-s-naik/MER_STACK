@@ -30,15 +30,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// userSchema.pre("save", function (next) {
-//   this.password = undefined;
-//   this.confirmPassword = undefined;
-//   next();
-// });
-
 // final step
 const userModel = mongoose.model("user", userSchema);
 module.exports = userModel;
-
-
-// admin moderator

@@ -1,5 +1,4 @@
-const userModel = require("./userModel");
-const movieModel = require("./moviesModel");
+const userModel = require("../Models/userModel");
 
 const createUser = async function (req, res) {
   try {
@@ -9,19 +8,6 @@ const createUser = async function (req, res) {
   } catch (err) {
     res.status(500).json({
       message: "internal server error",
-      error: err,
-    });
-  }
-};
-
-const addMovies = async (req, res) => {
-  try {
-    const movieObject = req.body;
-    const movie = await movieModel.create(movieObject);
-    res.status(200).json(movie);
-  } catch (err) {
-    res.status(500).json({
-      message: "internal server  error",
       error: err,
     });
   }
@@ -109,7 +95,6 @@ const deleteUserById = async (req, res) => {
 
 module.exports = {
   createUser,
-  addMovies,
   getAlluser,
   deleteUserById,
   getUserById,
