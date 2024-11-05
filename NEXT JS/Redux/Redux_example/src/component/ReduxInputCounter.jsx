@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import counterSlice from "../ReduxCounter/CounterSlice";
-function ReduxCounter() {
-  const count = useSelector((store) => store.counterState.count);
+
+function ReduxInputCounter() {
+  const [value, setvalue] = useState("");
+  const count = useSelector((state) => state.counterState.count);
   const dispatch = useDispatch();
   const actions = counterSlice.actions;
 
@@ -14,8 +16,23 @@ function ReduxCounter() {
     dispatch(actions.decrement());
   };
 
+  const updateDeltaHandler = () => {
+    dispatch(actions.updateDeltaHandler(Number(value)));
+    setvalue("");
+  };
+
   return (
     <>
+      <div style={{ display: "flex", gap: "5px" }}>
+        <input
+          type="text"
+          onChange={(e) => {
+            setvalue(e.target.value);
+          }}
+          value={value}
+        />
+        <button onClick={updateDeltaHandler}>Update delta</button>
+      </div>
       <div
         style={{
           height: "100vh",
@@ -34,4 +51,4 @@ function ReduxCounter() {
   );
 }
 
-export default ReduxCounter;
+export default ReduxInputCounter;
