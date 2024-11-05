@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import counterSlice from "../CounterSlice";
+import counterSlice from "../ReduxCounter/CounterSlice";
 
 function UseValue() {
   const count = useSelector((store) => store.counterState.count);
