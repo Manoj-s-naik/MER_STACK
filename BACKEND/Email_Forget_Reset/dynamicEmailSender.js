@@ -48,16 +48,4 @@ async function emailSender(templatePath, recieverEmail, toreplaceObject) {
   }
 }
 
-// const toreplaceObject = {
-//   name: "Manoj",
-//   otp: "03",
-// };
-
-// // Call emailSender with the path to the HTML template, recipient email, and replacement data
-// emailSender("./otp.html", "manoj.naik.4work@gmail.com", toreplaceObject).then(
-//   () => {
-//     console.log("Email is sent.");
-//   }
-// );
-
 module.exports = emailSender;

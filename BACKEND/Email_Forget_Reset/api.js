@@ -6,10 +6,8 @@ const cookieParser = require("cookie-parser");
 const userModel = require("./userModel");
 const jwt = require("jsonwebtoken");
 const util = require("util");
-const internal = require("stream");
 const promisify = util.promisify;
 const promisdiedJWTsign = promisify(jwt.sign);
-const promisdiedJWTverify = promisify(jwt.verify);
 const emailSender = require("./dynamicEmailSender");
 
 dotenv.config({ path: "./.env" });
