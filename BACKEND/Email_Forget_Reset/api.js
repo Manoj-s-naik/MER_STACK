@@ -9,6 +9,7 @@ const util = require("util");
 const promisify = util.promisify;
 const promisdiedJWTsign = promisify(jwt.sign);
 const emailSender = require("./dynamicEmailSender");
+const {getMediaList,tmdbBaseUrl,TMDB_ENDPOINT}=require("./utility");
 
 dotenv.config({ path: "./.env" });
 const dbLink = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.2zfal.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -134,8 +135,8 @@ const forgetPasswordHandler = async (req, res) => {
       otp: otp,
       resetUrl: `http://localhost:3000/api/auth/resetPassword/${user["_id"]}`,
     });
-    const templateData = {name : user.name, otp:user.otp}
-    await emailSender("./templates/otp.html",user.email,templateData)
+    const templateData = { name: user.name, otp: user.otp };
+    await emailSender("./templates/otp.html", user.email, templateData);
   } catch (err) {
     res.status(500).json({
       message: " internal server error",
@@ -146,74 +147,105 @@ const forgetPasswordHandler = async (req, res) => {
 
 async function resetPasswordHandler(req, res) {
   try {
-      /**
-       * 1. id ,  id
-       * 2. if otp , password , confirmPassword are present
-       *      *  otp should n't be expires
-       *      * otp compare -> if matches
-       *      *  password update
-       *      *  re-route them to login page
-       * ***/
-      let resetDetails = req.body;
-      // required fields are there or not 
-      if (!resetDetails.password || !resetDetails.confirmPassword
-          || !resetDetails.otp
-          || resetDetails.password != resetDetails.confirmPassword) {
-          res.status(401).json({
-              status: "failure",
-              message: "invalid request"
-          })
-      }
-      const userId = req.params.userId;
-      const user = await userModel.findById(userId);
-      // if user is not present
-      if (user == null) {
-          return res.status(404).json({
-              status: "failure",
-              message: "user not found"
-          })
-      }
-      // if otp is not present  in db user
-      if (user.otp == undefined) {
-          return res.status(401).json({
-              status: "failure",
-              message: "unauthorized acces to reset Password"
-          })
-      }
+    /**
+     * 1. id ,  id
+     * 2. if otp , password , confirmPassword are present
+     *      *  otp should n't be expires
+     *      * otp compare -> if matches
+     *      *  password update
+     *      *  re-route them to login page
+     * ***/
+    let resetDetails = req.body;
+    // required fields are there or not
+    if (
+      !resetDetails.password ||
+      !resetDetails.confirmPassword ||
+      !resetDetails.otp ||
+      resetDetails.password != resetDetails.confirmPassword
+    ) {
+      res.status(401).json({
+        status: "failure",
+        message: "invalid request",
+      });
+    }
+    const userId = req.params.userId;
+    const user = await userModel.findById(userId);
+    // if user is not present
+    if (user == null) {
+      return res.status(404).json({
+        status: "failure",
+        message: "user not found",
+      });
+    }
+    // if otp is not present  in db user
+    if (user.otp == undefined) {
+      return res.status(401).json({
+        status: "failure",
+        message: "unauthorized acces to reset Password",
+      });
+    }
 
-      // if otp is expired
-      if (Date.now() > user.otpExpiry) {
-          return res.status(401).json({
-              status: "failure",
-              message: "otp expired"
-          })
-      }
-      // if otp is incorrect
-      if (user.otp != resetDetails.otp) {
-          return res.status(401).json({
-              status: "failure",
-              message: "otp is incorrect"
-          })
-      }
-      user.password = resetDetails.password;
-      user.confirmPassword = resetDetails.confirmPassword;
-      // remove the otp from the user
-      user.otp = undefined;
-      user.otpExpiry = undefined;
-      await user.save();
-      res.status(200).json({
-          status: "success",
-          message: "password reset successfully"
-      })
-
+    // if otp is expired
+    if (Date.now() > user.otpExpiry) {
+      return res.status(401).json({
+        status: "failure",
+        message: "otp expired",
+      });
+    }
+    // if otp is incorrect
+    if (user.otp != resetDetails.otp) {
+      return res.status(401).json({
+        status: "failure",
+        message: "otp is incorrect",
+      });
+    }
+    user.password = resetDetails.password;
+    user.confirmPassword = resetDetails.confirmPassword;
+    // remove the otp from the user
+    user.otp = undefined;
+    user.otpExpiry = undefined;
+    await user.save();
+    res.status(200).json({
+      status: "success",
+      message: "password reset successfully",
+    });
   } catch (err) {
-      console.log("err", err);
-      res.status(500).json({
-          message: err.message,
-          status: "failure"
-      })
+    console.log("err", err);
+    res.status(500).json({
+      message: err.message,
+      status: "failure",
+    });
   }
 }
+
+
+
+
+
+const getCurrentMovies = async (req, res) => {
+  const url =tmdbBaseUrl+TMDB_ENDPOINT.fetchcurrentMovies;
+  const currentMovie = await getMediaList(url);
+  res.status(200).json({
+    status: "success",
+    message: currentMovie,
+  });
+};
+
+const getTopRatedMovies =async (req,res)=>{
+  const url =tmdbBaseUrl+TMDB_ENDPOINT.fetchTopRated;
+  const topRatedMovie = await getMediaList(url);
+  res.status(200).json({
+    status: "success",
+    message: topRatedMovie,
+  });
+}
+
+app.get("/api/movies/currentPlaying", getCurrentMovies);
+app.get("/api/movies/topRated", getTopRatedMovies);
+
+
+
+
 
 
 app.post("/api/auth/sign", signUpHandler);
