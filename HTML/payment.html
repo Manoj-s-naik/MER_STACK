@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+
+      flex-direction: column;
+    }
+    .paymentButton {
+      width: 3rem;
+    }
+  </style>
+  <body>
+    <h1>To check why payment is not implement through frontend</h1>
+    <div class="container">
+      <p>pay now</p>
+      <button class="paymentButton" onclick="paymentConfirmHandler()">
+        260
+      </button>
+    </div>
+  </body>
+  <script>
+    const button = document.querySelector("button");
+    const amount = document.querySelector("p");
+    const container = document.querySelector("div");
+    const paymentConfirmHandler = () => {
+      const value = button.innerText;
+      console.log(value);
+      const confirmAmount = document.createElement("p");
+      const confirmationMessage = `the amount is ${value}`;
+      confirmAmount.innerText = confirmationMessage;
+      container.appendChild(confirmAmount);
+    };
+  </script>
+</html>
