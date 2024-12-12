@@ -110,7 +110,7 @@ const forgetPasswordHandler = async (req, res) => {
    * ***/
   try {
     const Email = req.body.email;
-    console.log(Email);
+ 
 
     if (Email == undefined) {
       return res.status(400).json({
