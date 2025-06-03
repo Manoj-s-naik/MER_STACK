@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <div>
-        <SayHello></SayHello> 
+        <SayHello />
         {/* <ParentCounter></ParentCounter> */}
-        <InputBox></InputBox>
+        {/* <InputBox></InputBox> */}
 
       </div>
     </>
